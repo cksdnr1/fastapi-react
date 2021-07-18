@@ -22,7 +22,7 @@ services:
       POSTGRES_USER: {{cookiecutter.postgres_user}}
       POSTGRES_PASSWORD: {{cookiecutter.postgres_password}}
     ports:
-      - '5432:5432'
+      - '5433:5433'
     volumes:
       - db-data:/var/lib/postgresql/data:cached
 
@@ -34,7 +34,7 @@ services:
 
   flower:  
     image: mher/flower
-    command: flower --broker=redis://redis:6379/0 --port=5555
+    command: celery flower --broker=redis://redis:6379/0 --port=5555
     ports:  
         - 5555:5555
     depends_on:
